@@ -30,23 +30,17 @@ public class ConsultationController {
 
     Logger log = LoggerFactory.getLogger(ConsultationController.class);
 
-
-
-
     @Autowired
     private TestRequestUpdateService testRequestUpdateService;
 
     @Autowired
     private TestRequestQueryService testRequestQueryService;
 
-
     @Autowired
     TestRequestFlowService  testRequestFlowService;
 
     @Autowired
     private UserLoggedInService userLoggedInService;
-
-
 
     @GetMapping("/in-queue")
     @PreAuthorize("hasAnyRole('DOCTOR')")
@@ -75,8 +69,6 @@ public class ConsultationController {
         return testRequestQueryService.findByDoctor(doctor);
     }
 
-
-
     @PreAuthorize("hasAnyRole('DOCTOR')")
     @PutMapping("/assign/{id}")
     public TestRequest assignForConsultation(@PathVariable Long id) {
@@ -90,8 +82,6 @@ public class ConsultationController {
         User doctor = userLoggedInService.getLoggedInUser();
         return testRequestUpdateService.assignForConsultation(id,doctor);
     }
-
-
 
     @PreAuthorize("hasAnyRole('DOCTOR')")
     @PutMapping("/update/{id}")
@@ -115,7 +105,5 @@ public class ConsultationController {
             throw asBadRequest(e.getMessage());
         }
     }
-
-
 
 }
